@@ -1,0 +1,45 @@
+<section  id = "registration-Form" class="bg0 p-t-104 p-b-116 ">
+        <div class="container">
+            <div class="flex-w flex-tr ">
+                <toaster-container></toaster-container>
+                <div id="inner-form" class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+                    <form name="registrationForm" autocomplete="off" class="form-horizontal" ng-submit = "$rc.registerUser(registrationForm.$valid)" novalidate>
+                         
+                        <h4 class="mtext-105 cl2 txt-center p-b-30">
+                          Register in two Steps!!
+                        </h4>
+
+                        <div class="form-group" ng-class="{ 'has-error' :registrationForm.email.$error.email || registrationForm.email.$error.required && !registrationForm.email.$pristine}">         
+                            <div class="bor8 m-b-20 how-pos4-parent">
+                                <span class="form-control">
+                                    <input  type="email" autocomplete="off"  name="email" ng-model = "$rc.user.email"  class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" placeholder="Your Email Address" required>
+                                </span>
+                                <img class="how-pos4 pointer-none" src="assets/images/icons/icon-email.png" alt="ICON">
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-class="{ 'has-error' : registrationForm.password.$error.pattern || registrationForm.password.$error.required || registrationForm.password.$error.maxlength || registrationForm.password.$error.minlength && !registrationForm.password.$pristine}">
+                                <div class="bor8 m-b-20 how-pos4-parent">
+                                    <span class="form-control">
+                                        <input type="password" autocomplete="off" ng-pattern = "/^\S*$/" ng-model="$rc.user.password" ng-maxlength = "12" ng-minlength = "6" class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" name="password" placeholder="password" data-toggle="popover" data-content="6-12 characters, no spaces allowed." data-placement="right" data-trigger="focus" required>
+                                    </span>
+                                    <img class="how-pos4 pointer-none" src="assets/images/icons/lock-icon.png" alt="ICON">
+                                </div>
+                            </div>
+    
+                        <button type="submit" ng-disabled = "registrationForm.$invalid" class="btn flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" >
+                            Submit
+                        </button>
+                        <br>
+                        <button type="button" ng-click="$rc.goToLogin()" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" >
+                           Cancel
+                        </button>
+
+                       
+    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    

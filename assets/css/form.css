@@ -1,0 +1,20 @@
+#login-form {
+    background-image : url("../images/about-01.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+#inner-form {
+    background-color: whitesmoke;
+}
+#registration-Form {
+    background-image : url("../images/back1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+#resetLink {
+    font-family: Poppins-Medium;
+}

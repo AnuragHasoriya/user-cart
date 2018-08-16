@@ -1,0 +1,203 @@
+<html ng-app = "userCart">
+    <head>
+        <title>Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv = "X-UA-Compatible" content = "IE-edge">
+        <meta name = "description" content = "">
+        <meta name = "author" content = ""> 
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+        <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" href="assets/images/icons/favicon.png"/>
+        <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+        <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="assets/fonts/iconic/css/material-design-iconic-font.min.css">
+        <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="assets/fonts/linearicons-v1.0.0/icon-font.min.css">
+        <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.css">
+        <!--===============================================================================================-->	
+            <link rel="stylesheet" type="text/css" href="assets/vendor/css-hamburgers/hamburgers.min.css">
+        <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="assets/vendor/animsition/css/animsition.min.css">
+        <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="assets/vendor/select2/select2.min.css">
+        <!--===============================================================================================-->	
+            <link rel="stylesheet" type="text/css" href="assets/vendor/daterangepicker/daterangepicker.css">
+        <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="assets/vendor/slick/slick.css">
+        <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="assets/vendor/MagnificPopup/magnific-popup.css">
+        <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="assets/vendor/perfect-scrollbar/perfect-scrollbar.css">
+        <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="assets/css/util.css">
+            <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+            <link rel="stylesheet" type="text/css" href="assets/css/toaster.min.css">
+            <link rel="stylesheet" type="text/css" href="assets/css/form.css">
+        <!--===============================================================================================-->
+    </head>
+    <body class="animsition">
+
+        
+        
+        <div ui-view> </div>
+        
+
+        <!--*********** angular library *******************************************-->
+        <script src = "assets/lib/angular.min.js"></script>
+        <script src = "assets/lib/angular-animate.js"></script>
+        <script src = "assets/lib/angular-ui-router.min.js"></script>
+        <script src = "assets/lib/firebase.js"></script>    
+        <script src = "assets/lib/angularfire.min.js"></script>
+        <script src = "assets/lib/toaster.min.js"></script>
+        <script src = "assets/lib/lodash.min.js"></script>
+        <script src = "assets/lib/ocLazyLoad.js"></script>
+
+    <!--===============================================================================================-->	
+
+        <script src = "assets/bower_components/angular-data-grid/src/js/dataGrid.js"></script>
+        <script src = "assets/bower_components/angular-data-grid/src/js/pagination.js"></script>
+    <!--===============================================================================================-->	
+        <!-- initilizing firebase -->
+        <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyDc31fWdVDgLjad_7Bk-jKrSU5EYl1SFm4",
+                authDomain: "admin-cart.firebaseapp.com",
+                databaseURL: "https://admin-cart.firebaseio.com",
+                projectId: "admin-cart",
+                storageBucket: "admin-cart.appspot.com",
+                messagingSenderId: "593880194901"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+        <!--======================================= Custom angular files========================================================-->
+        <script src = "app/app.js"></script>
+        <script src = "app/app.route.js"></script>     
+
+        <!-- angular service -->
+        <script src = "app/services/firebase.service.js"></script>
+
+     
+        
+    
+    <!--    layout script-->
+
+	<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+        <script src="assets/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+        <script src="assets/vendor/bootstrap/js/popper.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+        <script src="assets/vendor/select2/select2.min.js"></script>
+        <script>
+            $(".js-select2").each(function(){
+                $(this).select2({
+                    minimumResultsForSearch: 20,
+                    dropdownParent: $(this).next('.dropDownSelect2')
+                });
+            })
+        </script> 
+    <!--===============================================================================================-->
+        <script src="assets/vendor/daterangepicker/moment.min.js"></script>
+        <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+        <script src="assets/vendor/slick/slick.min.js"></script>
+        <script src="app/js/slick-custom.js"></script>
+    <!--===============================================================================================-->
+        <script src="assets/vendor/parallax100/parallax100.js"></script>
+        <script>
+            $('.parallax100').parallax100();
+        </script>
+    <!--===============================================================================================-->
+        <script src="assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+        <script>
+            $('.gallery-lb').each(function() { // the containers for all your galleries
+                $(this).magnificPopup({
+                    delegate: 'a', // the selector for gallery item
+                    type: 'image',
+                    gallery: {
+                        enabled:true
+                    },
+                    mainClass: 'mfp-fade'
+                });
+            });
+        </script>
+    <!--===============================================================================================-->
+        <script src="assets/vendor/isotope/isotope.pkgd.min.js"></script>
+    <!--===============================================================================================-->
+        <script src="assets/vendor/sweetalert/sweetalert.min.js"></script>
+        <script>
+            $('.js-addwish-b2').on('click', function(e){
+                e.preventDefault();
+            });
+    
+            $('.js-addwish-b2').each(function(){
+                var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+                $(this).on('click', function(){
+                    swal(nameProduct, "is added to wishlist !", "success");
+    
+                    $(this).addClass('js-addedwish-b2');
+                    $(this).off('click');
+                });
+            });
+    
+            $('.js-addwish-detail').each(function(){
+                var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+    
+                $(this).on('click', function(){
+                    swal(nameProduct, "is added to wishlist !", "success");
+    
+                    $(this).addClass('js-addedwish-detail');
+                    $(this).off('click');
+                });
+            });
+    
+            /*---------------------------------------------*/
+    
+            $('.js-addcart-detail').each(function(){
+                var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+                $(this).on('click', function(){
+                    swal(nameProduct, "is added to cart !", "success");
+                });
+            });
+        
+        </script>
+    <!--===============================================================================================-->
+        <script src="assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+        <script>
+            $('.js-pscroll').each(function(){
+                $(this).css('position','relative');
+                $(this).css('overflow','hidden');
+                var ps = new PerfectScrollbar(this, {
+                    wheelSpeed: 1,
+                    scrollingThreshold: 1000,
+                    wheelPropagation: false,
+                });
+    
+                $(window).on('resize', function(){
+                    ps.update();
+                })
+            });
+        </script>
+    <!--===============================================================================================-->
+       
+        <script src = "app/components/landing/landing.controller.js"></script>
+        <script src = "app/components/login/login.controller.js"></script> 
+        <script src = "app/components/register/register.controller.js"></script>
+        <script src = "app/components/authentication/verify.controller.js"></script>
+        <script src = "app/components/profile/profile.controller.js"></script>
+        <script src = "app/components/login/reset.controller.js"></script>
+        <script src = "app/components/login/newPassword.controller.js"></script>
+        <script src = "app/components/dashboard/dashboard.controller.js"></script>
+        <script src = "app/components/product/product.controller.js"></script>
+        <script src = "app/js/main.js"></script>
+    </body>
+</html>
