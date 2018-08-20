@@ -3,14 +3,15 @@
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-						All Products
+						<span ng-click="$prod.getProductData()">All Products</span>
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-						Women
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" ng-repeat="category in $prod.categoryTableData" data-filter=".women">
+						<span ng-bind="category.name" ng-click="$prod.getProductData(category)"></span>
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
+					<!-- <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
 						Men
 					</button>
 
@@ -24,7 +25,7 @@
 
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
 						Watches
-					</button>
+					</button> -->
 				</div>
 
 				<div class="flex-w flex-c-m m-tb-10">
@@ -299,7 +300,7 @@
 
                         <div class="block2-txt flex-w flex-t p-t-14">
                             <div class="block2-txt-child1 flex-col-l ">
-                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                <a ui-sref="userCart.productDetails({key : product.key})" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                     <span ng-bind="product.name"></span>    
                                 </a>
 
@@ -309,10 +310,10 @@
                             </div>
 
                             <div class="block2-txt-child2 flex-r p-t-3">
-                                <a href="javascript:void(-1 )" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                    <img class="icon-heart1 dis-block trans-04" src="/assets/images/icons/icon-heart-01.png" alt="ICON">
-                                    <img class="icon-heart2 dis-block trans-04 ab-t-l" src="/assets/images/icons/icon-heart-02.png" alt="ICON">
-                                </a>
+                                <a href="javascript:void(0)" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                    <img class="icon-heart1 dis-block trans-04" src="/assets/images/icons/icon-heart-01.png" ng-if="!product.wishList" ng-click="$prod.addToWish(product)" alt="ICON">
+                                    <img class="icon-heart1 dis-block trans-04" src="/assets/images/icons/icon-heart-02.png"  ng-if="product.wishList" ng-click="$prod.removeWish(product)" alt="ICON">
+								</a>
                             </div>
                         </div>
                     </div>

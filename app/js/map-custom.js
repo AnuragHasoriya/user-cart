@@ -218,8 +218,9 @@
             ];
 
             if (selector_map !== undefined) {
+                var latlng = new google.maps.LatLng(39.305, -76.617);
                 var map = new google.maps.Map(document.getElementById('google_map'), {
-                    zoom: Number(map_zoom),
+                    zoom: 12,
                     zoomControl: false,  
                     disableDoubleClickZoom: true,
                     scrollwheel: scrollwhell,
@@ -228,7 +229,7 @@
                     scaleControl: false,
                     draggable: draggable,
                     styles: style,
-                    center: new google.maps.LatLng(latitude, longitude),
+                    center: latlng,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 });
             }

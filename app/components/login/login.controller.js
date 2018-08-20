@@ -31,7 +31,7 @@
                     if(emailVerified) {
                         toaster.pop("info", "LoggedIn!!", "Login Successfull Welcome!!");
                         $timeout(function() {
-                            $state.go("userCart.dashboard");
+                            $state.go("userCart.dashboard", {currentId});
                         }, 1000);
                     } else {
                         $timeout(function() {

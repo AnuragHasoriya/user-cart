@@ -76,6 +76,14 @@
             };
             firebase.initializeApp(config);
         </script>
+        <!--======================================= Mailjs========================================================-->
+        <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.2.4/email.min.js"></script>
+        <script type="text/javascript">
+            (function(){
+                emailjs.init("user_GWzZiJj4sKBbqdpvyYRj0");
+            })();
+        </script>
+
 
         <!--======================================= Custom angular files========================================================-->
         <script src = "app/app.js"></script>
@@ -187,6 +195,10 @@
                 })
             });
         </script>
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
+        <script src="app/js/map-custom.js"></script> -->
+        <!--===============================================================================================-->
+       <!-- maps -->
     <!--===============================================================================================-->
        
         <script src = "app/components/landing/landing.controller.js"></script>
@@ -198,6 +210,10 @@
         <script src = "app/components/login/newPassword.controller.js"></script>
         <script src = "app/components/dashboard/dashboard.controller.js"></script>
         <script src = "app/components/product/product.controller.js"></script>
+        <script src = "app/components/product/productDetails.controller.js"></script>
+        <script src = "app/shared/contact/contact.controller.js"></script>
+        <script src = "app/shared/layout/header.controller.js"></script>
+        <script src = "app/components/cart/cart.controller.js"></script>
         <script src = "app/js/main.js"></script>
     </body>
 </html>

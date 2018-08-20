@@ -14,7 +14,10 @@
             getCurrentUser: getCurrentUser,
             resetPassword : resetPassword,
             getLoginData : getLoginData,
-            getData : getData
+            getData : getData,
+            getProductCatData : getProductCatData,
+            getCartList : getCartList,
+            getWishList : getWishList
             // tokenId : tokenId
         }
 
@@ -72,9 +75,58 @@
             })
         }
 
-    }
+        function getProductCatData(categoryKey) {
+            return $q(function(resolve, reject) {
+                var productCatList = firebase.database().ref().child("products").orderByChild("category").equalTo(categoryKey);
+                productCatList.on('value', snapshot => {
+                    if(snapshot.exists()) {
+                        var data = _.map(snapshot.val(), function(obj, key){
+                            obj.key = key
+                            return obj 
+                        })
+                        resolve(data)
+                    } else {
+                        reject("something went wrong");
+                    }
+                });
+            })
+        }
 
-    
+        function getWishList(uid) {
+            return $q(function(resolveWish, rejectWish) {
+                var wishList = firebase.database().ref().child('users').child(uid).child("wishlist");
+                wishList.on("value", snapshot => {
+                    if(snapshot.exists()) {
+                        var data = _.map(snapshot.val(), function(obj, key) {
+                            obj.key = key
+                            return obj 
+                        })
+                        resolveWish(data);
+                    } else {
+                        rejectWish();
+                    }
+                })
+            })
+        }
+
+        function getCartList(uid) {
+            return $q(function(resolveCart, rejectCart) {
+                var cartList = firebase.database().ref().child('users').child(uid).child("cartlist");
+                cartList.on("value", snapshot => {
+                    if(snapshot.exists()) {
+                        var data = _.map(snapshot.val(), function(obj, key) {
+                            obj.key = key
+                            return obj 
+                        })
+                        resolveCart(data);
+                    } else {
+                        rejectCart();
+                    }
+                })
+            })
+        }
+
+    }
 
 })();
 

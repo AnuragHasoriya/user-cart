@@ -1,14 +1,18 @@
 (function() {
-    "use strict"
-    angular
-      .module("userCart")
-      .controller("dashboardController", dashboardController);
+  "use strict"
+  angular
+    .module("userCart")
+    .controller("dashboardController", dashboardController);
 
-    dashboardController.$inject = ["$scope", "$state"];
+  dashboardController.$inject = ["$scope", "$state", "firebaseService"];
 
-    function dashboardController($scope, $state) {
+  function dashboardController($scope, $state, firebaseService) {
 
     var vm = this;
+    
+
+    
+
     
   } 
 })();

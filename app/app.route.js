@@ -16,7 +16,7 @@
                     },
                     "header@userCart" : {
                         templateUrl : "app/shared/layout/header.html",
-                        // controller : "headerController as $hd"
+                        controller : "headerController as $hd"
                     },
                     "footer@userCart" : {
                         templateUrl : "app/shared/layout/footer.html"
@@ -25,7 +25,7 @@
             })
             .state("userCart.dashboard", {
                 cache : true,
-                url : "/dashboard",
+                url : "/dashboard/:currentId",
                 views : {
                     "content" : {
                         templateUrl : "app/components/dashboard/dashboard.html",
@@ -48,7 +48,46 @@
                     }
                 }
             })
-            
+            .state("userCart.productDetails", {
+                cache : true,
+                url : "/productDetails/:key",
+                views : {
+                    "content" : {
+                        templateUrl : "app/components/product/productDetails.html",
+                        controller : "productDetailsController as $proDet"
+                    }
+                }
+            })
+            .state("userCart.about", {
+                cache : true,
+                url : "/about",
+                views : {
+                    "content" : {
+                        templateUrl : "app/shared/about/about.html",
+                        // controller : "productDetailsController as $proDet"
+                    }
+                }
+            })
+            .state("userCart.contact", {
+                cache : true,
+                url : "/contact",
+                views : {
+                    "content" : {
+                        templateUrl : "app/shared/contact/contact.html",
+                        controller : "contactController as $cont"
+                    }
+                }
+            })  
+            .state("userCart.cart", {
+                cache : true,
+                url : "/cart",
+                views : {
+                    "content" : {
+                        templateUrl : "app/components/cart/cart.html",
+                        controller : "cartController as $cart"
+                    }
+                }
+            })  
             .state("profile", {
                 cache : true,
                 url : "/profile/:uid",
@@ -98,9 +137,9 @@
 
         $transitions.onSuccess({to: true }, ($transition) => {
            
-            if($transition.$from() == $transition.$to()) {
-                $state.go('loading');
-            }
+            // if($transition.$from() == $transition.$to()) {
+            //     $state.go('loading');
+            // }
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) { 
                     var currentUser = user;

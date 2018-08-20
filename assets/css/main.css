@@ -3062,7 +3062,6 @@ input.num-product::-webkit-inner-spin-button {
 
 .hov-img0 img{
   width: 100%;
-  height: 75%;
   -webkit-transition: transform 0.9s ease;
   -o-transition: transform 0.9s ease;
   -moz-transition: transform 0.9s ease;
@@ -3388,4 +3387,29 @@ input.num-product::-webkit-inner-spin-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   opacity: .65;
+}
+
+#account {
+  padding-top: 3%;
+  height: 100%;
+}
+
+#sideAcc {
+  padding-top:22px
+}
+
+.accdet {
+background-color: lavenderblush
+}
+.menu {
+  color: #000;
+  font-size: 18px;
+}
+
+.menuHead {
+  color : #000;
+}
+
+.bgcol{
+  background-color: #cccccc; 
 }
