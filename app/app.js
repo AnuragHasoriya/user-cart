@@ -1,7 +1,7 @@
 (function() {
     var app = angular
         .module("userCart", 
-        [ "ui.router",
+        ["ui.router",
         "toaster",
         "firebase", 
         "dataGrid", 

@@ -25,7 +25,8 @@
             })
             .state("userCart.dashboard", {
                 cache : true,
-                url : "/dashboard/:currentId",
+                url : "/dashboard",
+                // /:currentId",
                 views : {
                     "content" : {
                         templateUrl : "app/components/dashboard/dashboard.html",

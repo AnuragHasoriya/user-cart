@@ -4,9 +4,9 @@
       .module("userCart")
       .controller("productController", productController);
 
-    productController.$inject = ["$scope", "$state", "firebaseService", "$timeout", "toaster"];
+    productController.$inject = ["$scope", "$rootScope", "$state", "firebaseService", "$timeout", "toaster"];
 
-    function productController($scope, $state, firebaseService, timeout, toaster) {
+    function productController($scope, $rootScope, $state, firebaseService, timeout, toaster) {
 
         var vm = this;
         vm.addToWish = addToWish;
@@ -52,9 +52,17 @@
                 var promise = firebaseService.getProductCatData(categoryKey);
                 promise.then(successPData, faliurePData)
             }
-           
-            
+ 
         }
+
+        function detailsWishList(data) {
+            wishList = data;
+        }
+
+        function noWishList() {
+
+        }
+
 
         function successPData(data) {
             var pdata = [];
@@ -73,6 +81,10 @@
             })
         }
 
+        function faliurePData(message){
+            toaster.pop("error", "Error", message);
+        }
+
         function setWishStatus(key) {
             for(var i = 0; i< wishList.length; i++) {
                 if(wishList[i].key == key) {
@@ -81,30 +93,23 @@
             }
         }
 
-        function detailsWishList(data) {
-            wishList = data;
-        }
-
-        function noWishList() {
-
-        }
-
-        function faliurePData(message){
-            toaster.pop("error", "Error", message);
-        }
-
         function addToWish(product) {
-            var currentUser = firebaseService.getCurrentUser(); 
-            var userUid = currentUser.uid;
+            // var currentUser = firebaseService.getCurrentUser(); 
+            // var userUid = currentUser.uid;
             var productKey = product.key 
             firebase.database().ref().child('users').child(userUid).child("wishlist").child(productKey).set({
-                productStatus : true
+                wishListStatus : true
             })
             _.forEach(vm.productTableData, function(value) {
                 if(product.key == value.key) {
                     value.wishList = true;
                 }
             })
+            
+            var count = 1;
+            $rootScope.$broadcast("wish", count);
+        
+          
             console.log(vm.productTableData);
         }
 
@@ -123,8 +128,12 @@
                 timeout(function() {
                     vm.productTableData
                 },10)
+               
+                var count = -1;
+                $rootScope.$broadcast("wish", count)
+                
             }
-        
+
             function failureDelete() {
 
             }

@@ -4,9 +4,9 @@
       .module("userCart")
       .controller("headerController", headerController);
 
-      headerController.$inject = ["$scope", "$state", "firebaseService", "$timeout", "toaster"];
+      headerController.$inject = ["$scope", "$state", "firebaseService", "$timeout", "toaster", "$rootScope"];
 
-    function headerController($scope, $state, firebaseService, timeout, toaster) {
+    function headerController($scope, $state, firebaseService, timeout, toaster, $rootScope) {
 
         var vm = this;
         vm.cart = cart;
@@ -50,19 +50,18 @@
                 if(currentUser) {
                     userUid = currentUser.uid;
                     var promise = firebaseService.getWishList(userUid);
-                    promise.then(detailsWishList, noWishList)
+                    promise.then(detailsWishList, noWishList);
+                    getCartDetails();
                 }
             })
         }
 
         function detailsWishList(data) {
             vm.wishListCount = data.length;
-            getCartDetails();
         }
 
         function noWishList() {
             vm.wishListCount = 0;
-            getCartDetails();
         }
 
         function getCartDetails() {
@@ -82,6 +81,14 @@
             $state.go("userCart.dashboard");
         }
       
+        $scope.$on("cart", function(event, data) {
+            vm.cartCount += data;
+        })
+
+        $scope.$on("wish", function(event, data) {
+            vm.wishListCount += data;
+        })
+
     } 
 })();
-
+    
