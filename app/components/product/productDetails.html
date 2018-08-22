@@ -1,13 +1,8 @@
 <!-- breadcrumb -->
 <div class="container" ng-init="$proDet.init()">
     <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <a ui-sref="userCart.product" class="stext-109 cl8 hov-cl1 trans-04">
             Home
-            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-        </a>
-
-        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
-            Men
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
@@ -68,10 +63,10 @@
 
 								<div class="size-204 respon6-next">
 									<div class="rs1-select2 bor8 bg0" >
-										<select id="dropDown" class="js-select2" name="time" ng-model="varient.selectedVarient" 
-										ng-change="$proDet.getVarients(varient.selectedVarient)" ng-options="values.value for values in varient.values">
-											<option value hidden>Please select</option>
-										</select>
+                                        <select  class="js-select2"  name="time" ng-change="$proDet.getVarients(varient.selectedVarient)" 
+                                        id="dropDown" ng-model="varient.value" ng-options="values.value for values in varient.values">
+                                            <option value hidden >Choose an option</option>
+                                        </select>
 										<div class="dropDownSelect2"></div>
 									</div>
 								</div>

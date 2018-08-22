@@ -3418,4 +3418,7 @@ background-color: lavenderblush
   display: block;
   width: 100%;
   border: none;
+  height: 5%;
+  color: #666666;
+  font-family: Arial, sans-serif;
 }

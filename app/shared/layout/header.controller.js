@@ -45,12 +45,12 @@
 
         function getShopDetails() {
             // userUid = $state.params.currentId;
-            firebase.auth().onAuthStateChanged(function(currentUser){
+            firebase.auth().onAuthStateChanged(function(currentUser) {
                 //var currentUser = firebaseService.getCurrentUser();
                 if(currentUser) {
                     userUid = currentUser.uid;
                     var promise = firebaseService.getWishList(userUid);
-                    promise.then(detailsWishList, noWishList);
+                        promise.then(detailsWishList, noWishList);
                     getCartDetails();
                 }
             })
@@ -58,7 +58,7 @@
 
         function detailsWishList(data) {
             vm.wishListCount = data.length;
-        }
+        } 
 
         function noWishList() {
             vm.wishListCount = 0;

@@ -17,8 +17,9 @@
             getData : getData,
             getProductCatData : getProductCatData,
             getCartList : getCartList,
-            getWishList : getWishList
-            // tokenId : tokenId
+            getWishList : getWishList,
+            getProductData :getProductData,
+            checkExistProd : checkExistProd
         }
 
         function signUp(email, password) {
@@ -75,6 +76,20 @@
             })
         }
 
+        function getProductData(key, tableName) {
+            return $q(function(resolve, reject){ 
+                firebase.database().ref().child(tableName).child(key).on('value', function(snapshot) {
+                    if(snapshot.exists()) {
+                        var data = snapshot.val();
+                        data.key = key;
+                        resolve(data)
+                    } else {
+                        reject("no rows present");
+                    }
+                })
+            })
+        }
+
         function getProductCatData(categoryKey) {
             return $q(function(resolve, reject) {
                 var productCatList = firebase.database().ref().child("products").orderByChild("category").equalTo(categoryKey);
@@ -89,6 +104,23 @@
                         reject("something went wrong");
                     }
                 });
+            })
+        }
+
+        function checkExistProd(userUid, productKey) {
+            return $q(function(resolve, reject) {
+                var checkExist = firebase.database().ref().child("users").child(userUid).child("cartlist").orderByKey().equalTo(productKey);
+                checkExist.once('value', snapshot => {
+                  if(snapshot.exists()) {
+                    var data = _.map(snapshot.val(), function(obj, key) {
+                        obj.key = key
+                        return obj 
+                    })   
+                    resolve(data)
+                  } else {
+                    reject();
+                  }
+                })
             })
         }
 

@@ -9,13 +9,17 @@
   function productDetailsController($scope, $state, firebaseService, $rootScope, toaster) {
 
     var vm = this;
-    vm.init = init;
     var productKey = null; 
+    var userUid = null;
+    var varientList = null;
+    var cartVarientList = null;
+    vm.init = init;
     vm.productDetails = [];
     vm.imageArr = [];
     vm.addCart = addCart;
-    vm.getVarients = getVarients;
     vm.selectedVarients = [];
+
+    
 
     function init() {
       productKey = $state.params.key;
@@ -37,28 +41,66 @@
     }
 
     function addCart() {
-      var count = 1;
-      // $rootScope.emit("cart", count);
-      var varientList =  vm.productDetails.varients.map((res) => { 
+      var count = 0;
+      var varientStatus = null;
+      var varientName = "";
+      varientList =  vm.productDetails.varients.map((res) => { 
         return {
-          name: res.name, 
-          value: res.selectedVarient.value
+          name : res.name, 
+          value : res.value
         } 
       });
+      _.forEach(varientList, function(val) {
+        if (count < varientList.length) {
+          if (val.name && val.value == undefined) {
+            varientStatus = false;
+            varientName = varientName + " " + val.name;
+            count ++;
+          } else{
+            varientStatus = true;
+            count ++;
+          }
+        } 
+      })
 
-      if(varientList.name && varientList.value == null) {
-        toaster.pop("error","Error", "Please select size and color")
+      if(varientStatus) {
+        cartVarientList = varientList.map(function(obj) {
+          var rObj = {};
+          rObj[obj.name] = obj.value.value
+          return rObj 
+        })
+        var currentUser = firebaseService.getCurrentUser();
+        userUid = currentUser.uid;
+        var promise = firebaseService.checkExistProd(userUid, productKey)
+        promise.then(dataExists, dataEmpty);
+        
       } else {
-        toaster.pop("info","Success", "cdcsc")
+        toaster.pop("error", "Error", "Please select" + varientName)
       }
-
     }
 
-    function getVarients(data) {
-      // vm.selectedVarients.push(data);
-      console.log(vm.selectedVarients);
+    function dataExists(data) {
+      debugger
+      _.forEach(data, (val) => {
+        var fireData = JSON.stringify(val.varients);
+        var appData = JSON.stringify(cartVarientList);
+        if(fireData == appData) {
+          toaster.pop("info", "checkOut", "item Already Present");
+        } else{
+          dataEmpty();
+        }
+      })
     }
 
+    function dataEmpty() {
+      firebase.database().ref().child('users').child(userUid).child("cartlist").child(productKey).set({
+        cartListStatus : true,
+        varients : cartVarientList
+      });
+      var cartCount = 1;
+      $rootScope.$broadcast("cart", cartCount);
+      toaster.pop("info", "Added", "Go to cart for Checkout")
+    }
   }
 })();
 
