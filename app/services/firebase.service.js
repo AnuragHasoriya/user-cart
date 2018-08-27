@@ -19,7 +19,8 @@
             getCartList : getCartList,
             getWishList : getWishList,
             getProductData :getProductData,
-            checkExistProd : checkExistProd
+            checkExistProd : checkExistProd,
+            getInventoryVarient : getInventoryVarient
         }
 
         function signUp(email, password) {
@@ -155,6 +156,22 @@
                         rejectCart();
                     }
                 })
+            })
+        }
+
+        function getInventoryVarient(tableName, productKey) {
+            return $q(function(resolve, reject) {
+                var productCatList = firebase.database().ref().child(tableName).orderByChild("productkey").equalTo(productKey);
+                productCatList.on('value', snapshot => {
+                    if(snapshot.exists()) {
+                        var data = _.map(snapshot.val(), function(obj, key){
+                            obj.key = key
+                            resolve(obj) 
+                        })
+                    } else {
+                        reject("something went wrong");
+                    }
+                });
             })
         }
 

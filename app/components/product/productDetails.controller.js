@@ -11,15 +11,21 @@
     var vm = this;
     var productKey = null; 
     var userUid = null;
-    var varientList = null;
+    var varientList = [];
     var cartVarientList = null;
     vm.init = init;
     vm.productDetails = [];
     vm.imageArr = [];
     vm.addCart = addCart;
     vm.selectedVarients = [];
+    vm.addProductCount = addProductCount;
+    vm.productCount = 0;
+    vm.getVarients = getVarients;
+    var VarientCount = null; 
+    var varientName = "";
+    var inventoryList = null;
+    var selectionStatus = null;
 
-    
 
     function init() {
       productKey = $state.params.key;
@@ -40,27 +46,68 @@
 
     }
 
-    function addCart() {
-      var count = 0;
-      var varientStatus = null;
-      var varientName = "";
-      varientList =  vm.productDetails.varients.map((res) => { 
+    function getVarients() {
+      var value= null;    
+      var data = vm.productDetails.varients.map((res) => { 
+        if(res.value)
         return {
-          name : res.name, 
-          value : res.value
+          varient : res.value.value
+        }
+      });
+        
+      _.forEach(data, function(val) {
+        if(val == undefined) {
+          selectionStatus = false;
+          varientList = [];
+        } else {
+          varientList.push(val.varient) 
+          selectionStatus = true;
+        }
+
+      })
+        
+     if(selectionStatus) {
+        _.forEach(varientList, function(varient) {
+          varientName = varientName + varient;
+        })
+        varientList = [];
+        var promise = firebaseService.getInventoryVarient("inventory", productKey);
+        promise.then(varientData, varientEmpty);
+     }
+    }
+
+    function varientData(data) {
+      inventoryList = data.stock;
+
+    }
+
+    function varientEmpty() {
+
+    }
+
+    function addProductCount(num) {
+      if(varientName.length > 0) {
+        if(vm.productCount >= 0) {
+          vm.productCount = vm.productCount + num;
+        } else {
+          toaster.pop("error", "Error", "Not allowed" )
+        }
+      } else {
+        toaster.pop("error", "Error", "Please select size and color");
+      }
+    } 
+
+    function addCart() {
+      var varientStatus = null;
+     
+      var data =  vm.productDetails.varients.map((res) => { 
+        return {
+          varient : res.value.value,
         } 
       });
-      _.forEach(varientList, function(val) {
-        if (count < varientList.length) {
-          if (val.name && val.value == undefined) {
-            varientStatus = false;
-            varientName = varientName + " " + val.name;
-            count ++;
-          } else{
-            varientStatus = true;
-            count ++;
-          }
-        } 
+
+      data = varientList.map((res) => {
+        return value = res.varient 
       })
 
       if(varientStatus) {
